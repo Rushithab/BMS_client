@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<div class="card bg-info text-white">
+    <div class="card-body">
+        <b>Available Shows</b><br><br>
+            <ng-container *ngFor="let show of shows">
+                <span class="p-2"> {{show.time}}</span>
+                <div class="ml-5 mt-2">
+                    <button class="btn btn-danger" [routerLink]="['/view-seats', show.time,show.movieId, show.theatreId]" >Book Ticket</button>
+                </div>
+            </ng-container>
+            
+    </div>
+</div>

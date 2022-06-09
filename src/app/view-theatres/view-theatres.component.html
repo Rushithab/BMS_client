@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<div class="jumbotron container">
+    <div class="d-flex flex-column">
+        <div class="d-flex flex-column text-center mb-5">
+            <b>Book Your Show in any of these Theatres</b>
+            <ng-container *ngFor="let theatre of theatres">
+                <span class="p-2">Theatre: {{theatre.name}}</span>
+                <span class="p-2">Movie : {{theatre.movieName}}</span>
+                <span class="p-2">City : {{theatre.city}}</span>
+                <div class="ml-5 mt-2">
+                    <button class="btn btn-danger" [routerLink]="['/view-shows',theatre.id]" >View Shows</button>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
