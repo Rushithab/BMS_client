@@ -74,6 +74,11 @@ export class TicketModel {
         this.MovieId = MovieId;
     }
 }
+export interface Login{
+    username:string;
+    password:string;
+}
+
 
 
 
