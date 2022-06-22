@@ -4,8 +4,13 @@
             <a class="navbar-brand" [routerLink]="['/']"><img src="../../assets/logo.jpg"></a>
         </div>
 
-        <div>
-            <a class="btn btn-secondary" [routerLink]="['/']">
+       <div *ngIf="loginservice.logeduserdetails===null">
+            <a class="btn btn-secondary" [routerLink]="['/login']">
+              Sign in
+            </a>
+        </div>
+        <div *ngIf="loginservice.logeduserdetails!==null">
+            <a class="btn btn-secondary" href="" (click)="LogOut()">
                 LogOut
             </a>
         </div>
