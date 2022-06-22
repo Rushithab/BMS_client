@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormGroup } from '@angular/forms';
+import { FormBuilder,FormControl,FormGroup } from '@angular/forms';
 import {HttpClient} from'@angular/common/http';
 import {Router} from '@angular/router';
-
+import {LoginService} from '../services/login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,19 +10,27 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   form:FormGroup;
-  constructor(private formBuilder:FormBuilder,private http:HttpClient,private router:Router) { }
 
+  constructor(private formBuilder:FormBuilder,private http:HttpClient,private router:Router,private loginservice:LoginService) { }
+  loginDetails=new FormGroup({
+    username: new FormControl(''),
+    password:new FormControl('')
+  })
   ngOnInit(): void {
-    this.form=this.formBuilder.group({
-      username:'',
-      password:'',
-    });
+
   }
   submit():void{
-    this.http.post('https://localhost:7111/api/Authenticate/login',this.form.getRawValue(),{
-      withCredentials:true
-    }).subscribe(()=>
-    this.router.navigate(['/view-movie']));
+    this.loginservice.Login(this.loginDetails.value).subscribe(data=>{
+      console.log(data);
+      this.loginDetails.reset();
+      if(data==null){
+        alert("Invalid Credentials");
+        return;
+      }
+      this.loginservice.logeduserdetails=data;
+      this.router.navigate(['/view-movie']);
+    })
+    
   }
 
 
